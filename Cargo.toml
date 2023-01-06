@@ -3,10 +3,17 @@ name = "node_inject"
 version = "0.1.0"
 edition = "2021"
 
-
 [dependencies]
 rasar = {git = 'https://github.com/Zerthox/rasar.git'}
 random-string = "1.0.0"
+
+[[bin]]
+name="node-inject"
+path="src/node_inject/main.rs"
+
+[[bin]]
+name="license-gen"
+path="src/license_gen/main.rs"
 
 [features]
 no_embed = []
