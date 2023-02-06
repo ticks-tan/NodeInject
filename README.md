@@ -1,6 +1,6 @@
 # NodeInject
-a node inject
-more information: [NodeInject](https://github.com/DiamondHunters/NodeInject)
+
+more nodeinject information: [NodeInject](https://github.com/DiamondHunters/NodeInject)
 
 # Example
 ### Typora Crack
@@ -16,4 +16,3 @@ cd <Your Typora root dir>
 cargo run --bin license-gen --release
 ```
 3. open typora and input your license.
-
