@@ -19,7 +19,7 @@ jobs:
           rust: nightly-x86_64-msvc
           target: x86_64-pc-windows-msvc
           shell: powershell
-          archive-name: Typora_NodeInject-windows.zip
+          archive-name: Typora_NodeInject-windows.7z
       fail-fast: false
 
     steps:
@@ -42,6 +42,7 @@ jobs:
         RUST_BACKTRACE: 1
 
     - name: Build archive
+      shell: bash
       run: |
         mkdir archive
         cp LICENSE README.md archive/
@@ -49,7 +50,7 @@ jobs:
           cp "./target/${{ matrix.target }}/release/node-inject.exe" ./archive/
           cp "./target/${{ matrix.target }}/release/license-gen.exe" ./archive/
           cd archive
-          Compress-Archive -Path ./* -Destination ${{ matrix.archive-name }}
+          7z a "${{ matrix.archive-name }}" LICENSE README.md node-inject.exe license-gen.exe
         else
           cp "./target/${{ matrix.target }}/release/node-inject" ./archive/
           cp "./target/${{ matrix.target }}/release/license-gen" ./archive/
