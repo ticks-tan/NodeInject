@@ -12,12 +12,14 @@ jobs:
           os: ubuntu-latest
           rust: nightly
           target: x86_64-unknown-linux-musl
-          archive-name: Typora_NodeInject-linux.tar.gz
+          term: bash
+          archive-name: Typora_NodeInject-linux.zip
         - build: windows
           os: windows-2022
           rust: nightly-x86_64-msvc
           target: x86_64-pc-windows-msvc
-          archive-name: Typora_NodeInject-windows.7z
+          term: powershell
+          archive-name: Typora_NodeInject-windows.zip
       fail-fast: false
 
     steps:
@@ -40,21 +42,20 @@ jobs:
         RUST_BACKTRACE: 1
 
     - name: Build archive
-      shell: bash
+      shell: ${{ matrix.term }}
       run: |
         mkdir archive
         cp LICENSE README.md archive/
-        ls -lR
         if [ "${{ matrix.build }}" = "windows" ]; then
           cp "./target/${{ matrix.target }}/release/node_inject.exe" ./archive/
           cp "./target/${{ matrix.target }}/release/license-gen.exe" ./archive/
           cd archive
-          7z a "${{ matrix.archive-name }}" LICENSE README.md node_inject.exe license-gen.exe
+          Compress-Archive -Path ./* -Destination ${{ matrix.archive-name }}
         else
           cp "./target/${{ matrix.target }}/release/node_inject" ./archive/
           cp "./target/${{ matrix.target }}/release/license-gen" ./archive/
           cd archive
-          tar -czf "${{ matrix.archive-name }}" LICENSE README.md node_inject license-gen
+          zip -r ${{ matrix.archive-name }} *
         fi
     - name: Upload archive
       uses: actions/upload-artifact@v4
