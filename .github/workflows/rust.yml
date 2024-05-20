@@ -35,7 +35,7 @@ jobs:
       env:
         RUST_BACKTRACE: 1
     - name: Build binary - [license-gen]
-      run: cargo build --verbose --release --bin license-gen --target $({ matrix.target })
+      run: cargo build --verbose --release --bin license-gen --target ${{ matrix.target }}
       env:
         RUST_BACKTRACE: 1
 
