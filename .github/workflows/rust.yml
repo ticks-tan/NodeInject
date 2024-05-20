@@ -46,12 +46,12 @@ jobs:
         mkdir archive
         cp LICENSE README.md archive/
         if [ "${{ matrix.build }}" = "windows" ]; then
-          cp "./target/${{ matrix.target }}/release/node_inject.exe" ./archive/
+          cp "./target/${{ matrix.target }}/release/node-inject.exe" ./archive/
           cp "./target/${{ matrix.target }}/release/license-gen.exe" ./archive/
           cd archive
           Compress-Archive -Path ./* -Destination ${{ matrix.archive-name }}
         else
-          cp "./target/${{ matrix.target }}/release/node_inject" ./archive/
+          cp "./target/${{ matrix.target }}/release/node-inject" ./archive/
           cp "./target/${{ matrix.target }}/release/license-gen" ./archive/
           cd archive
           zip -r ${{ matrix.archive-name }} *
