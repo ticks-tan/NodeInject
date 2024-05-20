@@ -12,13 +12,13 @@ jobs:
           os: ubuntu-latest
           rust: nightly
           target: x86_64-unknown-linux-musl
-          term: bash
+          shell: bash
           archive-name: Typora_NodeInject-linux.zip
         - build: windows
           os: windows-2022
           rust: nightly-x86_64-msvc
           target: x86_64-pc-windows-msvc
-          term: powershell
+          shell: powershell
           archive-name: Typora_NodeInject-windows.zip
       fail-fast: false
 
@@ -42,7 +42,6 @@ jobs:
         RUST_BACKTRACE: 1
 
     - name: Build archive
-      shell: ${{ matrix.term }}
       run: |
         mkdir archive
         cp LICENSE README.md archive/
